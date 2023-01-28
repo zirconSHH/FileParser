@@ -36,16 +36,18 @@ class iniParser
 {
 public:
 	iniParser();
+	iniParser(const string& filepath);
 	int load(const string& filepath);
 
 	void printini();
 
+	value getinfo(const string& section, const string& key);
+
 private:
-	string filepath;
+	string filename;
 	map<string,section> iniIndex;
 
 };
-
 
 
 inline value::value()
@@ -122,8 +124,14 @@ inline iniParser::iniParser()
 {
 }
 
+inline iniParser::iniParser(const string& filepath)
+{
+	this->load(filepath);
+}
+
 int iniParser::load(const string& filepath)
 {
+	filename = filepath;
 	ifstream ifs(filepath, ios::in);
 	if (ifs.fail())
 		return -1;
@@ -143,15 +151,6 @@ int iniParser::load(const string& filepath)
 				return -2;
 			}
 			sectionname = context.substr(1, pos - 1);
-
-			//bool find = false;
-			//for (map<string, section>::iterator it = iniIndex.begin(); it != iniIndex.end(); it++)
-			//{
-			//	if (it->first == sectionname)
-			//		find = true;
-			//}
-			//if (find == false)
-			//	iniIndex[sectionname] = section();
 			
 		}
 		else
@@ -167,7 +166,7 @@ int iniParser::load(const string& filepath)
 			key.erase(remove(key.begin(), key.end(), ' '), key.end());
 			string val = context.substr(pos + 1, context.length() - pos - 1);
 			val.erase(remove(val.begin(), val.end(), ' '), val.end());
-			//cout << key << "|" << val << "|" << endl;
+
 			iniIndex[sectionname][key] = val;
 		}
 	}
@@ -185,4 +184,9 @@ inline void iniParser::printini()
 			cout << it->first << ":" << i->first << "|" << i->second.getvalue() << "|" << endl;
 		}
 	}
+}
+
+inline value iniParser::getinfo(const string& section, const string& key)
+{
+	return iniIndex[section][key];
 }

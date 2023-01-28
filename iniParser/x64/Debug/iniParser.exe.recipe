@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>A:\code\c++\iniParser\x64\Debug\iniParser.exe</FullPath>
+      <FullPath>A:\code\c++\FileParsers\iniParser\x64\Debug\iniParser.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
