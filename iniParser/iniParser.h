@@ -6,18 +6,18 @@
 #include <fstream>
 using namespace std;
 
-class value
+class ivalue
 {
 public:
-	value();
-	value(const bool& b);
-	value(const int& i);
-	value(const double& d);
-	value(const char* c);
-	value(const string& s);
+	ivalue();
+	ivalue(const bool& b);
+	ivalue(const int& i);
+	ivalue(const double& d);
+	ivalue(const char* c);
+	ivalue(const string& s);
 
-	void printvalue();
-	string getvalue();
+	void printivalue();
+	string getivalue();
 
 	operator bool();
 	operator int();
@@ -25,12 +25,12 @@ public:
 	operator string();
 
 private:
-	string objvalue;
+	string objivalue;
 
 };
 
 
-typedef map<string,value> section;
+typedef map<string,ivalue> section;
 
 class iniParser
 {
@@ -41,7 +41,7 @@ public:
 
 	void printini();
 
-	value getinfo(const string& section, const string& key);
+	ivalue getinfo(const string& section, const string& key);
 
 private:
 	string filename;
@@ -50,81 +50,81 @@ private:
 };
 
 
-inline value::value()
+ivalue::ivalue()
 {
 }
 
-inline value::value(const bool& b)
+ivalue::ivalue(const bool& b)
 {
 	if (b == true)
-		objvalue = "true";
+		objivalue = "true";
 	else
-		objvalue = "false";
+		objivalue = "false";
 
 }
 
-inline value::value(const int& i)
+ivalue::ivalue(const int& i)
 {
 	stringstream ss;
 	ss << i;
-	ss >> objvalue;
+	ss >> objivalue;
 }
 
-inline value::value(const double& d)
+ivalue::ivalue(const double& d)
 {
 	stringstream ss;
 	ss << d;
-	ss >> objvalue;
+	ss >> objivalue;
 }
 
-inline value::value(const char* c)
+ivalue::ivalue(const char* c)
 {
-	objvalue = c;
+	objivalue = c;
 }
 
-inline value::value(const string& s)
+ivalue::ivalue(const string& s)
 {
-	objvalue = s;
+	objivalue = s;
 }
 
-inline void value::printvalue()
+void ivalue::printivalue()
 {
-	cout << objvalue << endl;
+	cout << objivalue << endl;
 }
 
-inline string value::getvalue()
+string ivalue::getivalue()
 {
-	return objvalue;
+	return objivalue;
 }
 
-inline value::operator bool()
+ivalue::operator bool()
 {
-	if (objvalue == "true")
+	if (objivalue == "true")
 		return true;
 	return false;
 
 }
 
-inline value::operator int()
+ivalue::operator int()
 {
-	return atoi(objvalue.c_str());
+	return atoi(objivalue.c_str());
 }
 
-inline value::operator double()
+ivalue::operator double()
 {
-	return atof(objvalue.c_str());
+	return atof(objivalue.c_str());
 }
 
-inline value::operator string()
+ivalue::operator string()
 {
-	return objvalue;
+	return objivalue;
 }
 
-inline iniParser::iniParser()
+iniParser::iniParser()
 {
 }
 
-inline iniParser::iniParser(const string& filepath)
+iniParser::iniParser(const string& filepath)
 {
 	this->load(filepath);
 }
@@ -175,18 +175,18 @@ int iniParser::load(const string& filepath)
 	return 0;
 }
 
-inline void iniParser::printini()
+void iniParser::printini()
 {
 	for (map<string, section>::iterator it = iniIndex.begin(); it != iniIndex.end(); it++)
 	{
-		for (map<string, value>::iterator i = it->second.begin(); i != it->second.end(); i++)
+		for (map<string, ivalue>::iterator i = it->second.begin(); i != it->second.end(); i++)
 		{
-			cout << it->first << ":" << i->first << "|" << i->second.getvalue() << "|" << endl;
+			cout << it->first << ":" << i->first << "|" << i->second.getivalue() << "|" << endl;
 		}
 	}
 }
 
-inline value iniParser::getinfo(const string& section, const string& key)
+ivalue iniParser::getinfo(const string& section, const string& key)
 {
 	return iniIndex[section][key];
 }

@@ -1,2 +1,3 @@
 A:\code\c++\iniParser\x64\Debug\iniParser.exe
 A:\code\c++\FileParsers\iniParser\x64\Debug\iniParser.exe
+A:\code\c++\FileParser\iniParser\x64\Debug\iniParser.exe

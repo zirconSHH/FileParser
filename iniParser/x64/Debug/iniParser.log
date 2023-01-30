@@ -1,1 +1,4 @@
-﻿  iniParser.vcxproj -> A:\code\c++\FileParsers\iniParser\x64\Debug\iniParser.exe
+﻿  main.cpp
+A:\code\c++\FileParser\iniParser\iniParser.h(147,40): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+A:\code\c++\FileParser\iniParser\iniParser.h(158,40): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+  iniParser.vcxproj -> A:\code\c++\FileParser\iniParser\x64\Debug\iniParser.exe
